@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15A2301" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="introduce" rowHeight="77" id="f31-UJ-hI1" customClass="XRZFishingInfoCell">
+            <rect key="frame" x="0.0" y="0.0" width="463" height="77"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="f31-UJ-hI1" id="RcD-5o-Z01">
+                <rect key="frame" x="0.0" y="0.0" width="463" height="76"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="装修要求:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hYp-ob-O59">
+                        <rect key="frame" x="8" y="8" width="86" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="86" id="w7f-89-bz5"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="编写" translatesAutoresizingMaskIntoConstraints="NO" id="8By-U0-e9a">
+                        <rect key="frame" x="435" y="48" width="20" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="geU-Tb-oeD"/>
+                            <constraint firstAttribute="width" constant="20" id="yJG-iW-Wu2"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="个人介绍个人介绍个人介绍个人介绍个人介绍个人介绍个人介绍个人介绍个人介绍个人介绍个人介绍个人介绍个人介绍" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="btv-Eq-Z2c">
+                        <rect key="frame" x="102" y="0.0" width="361" height="40"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="8By-U0-e9a" firstAttribute="top" secondItem="btv-Eq-Z2c" secondAttribute="bottom" constant="8" symbolic="YES" id="Mc6-mX-eKO"/>
+                    <constraint firstItem="btv-Eq-Z2c" firstAttribute="top" secondItem="RcD-5o-Z01" secondAttribute="top" id="VCv-R6-Jtf"/>
+                    <constraint firstAttribute="trailing" secondItem="btv-Eq-Z2c" secondAttribute="trailing" id="bFT-Yy-YHA"/>
+                    <constraint firstItem="hYp-ob-O59" firstAttribute="leading" secondItem="RcD-5o-Z01" secondAttribute="leadingMargin" id="hUk-k2-1wN"/>
+                    <constraint firstItem="hYp-ob-O59" firstAttribute="top" secondItem="RcD-5o-Z01" secondAttribute="topMargin" id="jbi-13-dSg"/>
+                    <constraint firstItem="8By-U0-e9a" firstAttribute="bottom" secondItem="RcD-5o-Z01" secondAttribute="bottomMargin" id="qZa-WZ-a9g"/>
+                    <constraint firstItem="btv-Eq-Z2c" firstAttribute="leading" secondItem="hYp-ob-O59" secondAttribute="trailing" constant="8" symbolic="YES" id="tRU-eB-siQ"/>
+                    <constraint firstItem="8By-U0-e9a" firstAttribute="trailing" secondItem="RcD-5o-Z01" secondAttribute="trailingMargin" id="uvf-zs-qd7"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="descLab" destination="btv-Eq-Z2c" id="NfT-JJ-QZI"/>
+            </connections>
+            <point key="canvasLocation" x="486.5" y="342.5"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="编写" width="17" height="18"/>
+    </resources>
+</document>

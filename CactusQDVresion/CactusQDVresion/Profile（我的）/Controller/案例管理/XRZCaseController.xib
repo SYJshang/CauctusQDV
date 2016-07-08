@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15A2301" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="XRZCaseController">
+            <connections>
+                <outlet property="btnCase" destination="dfX-Im-dXU" id="vb7-8t-G9F"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="添加案例" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="swT-1A-ByR">
+                    <rect key="frame" x="234" y="372" width="133" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="133" id="A4P-p8-bhp"/>
+                        <constraint firstAttribute="height" constant="21" id="x1A-w4-RNZ"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <color key="textColor" red="0.097255296800000002" green="1" blue="0.50127326849999998" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dfX-Im-dXU">
+                    <rect key="frame" x="250" y="250" width="100" height="100"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="100" id="0oi-Ra-azs"/>
+                        <constraint firstAttribute="width" constant="100" id="eMN-oM-0j6"/>
+                    </constraints>
+                    <state key="normal" backgroundImage="案例管理_添加"/>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="dfX-Im-dXU" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="6se-ti-WoM"/>
+                <constraint firstItem="dfX-Im-dXU" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="RTk-ez-zvx"/>
+                <constraint firstItem="swT-1A-ByR" firstAttribute="top" secondItem="dfX-Im-dXU" secondAttribute="bottom" constant="22" id="TH1-rg-EJw"/>
+                <constraint firstItem="dfX-Im-dXU" firstAttribute="centerX" secondItem="swT-1A-ByR" secondAttribute="centerX" id="ZRm-yz-hbk"/>
+            </constraints>
+        </view>
+    </objects>
+    <resources>
+        <image name="案例管理_添加" width="77" height="77"/>
+    </resources>
+</document>

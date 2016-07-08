@@ -1,0 +1,40 @@
+//
+//  PrefixHeader.pch
+//  仙人掌抢单般
+//
+//  Created by apple on 16/4/11.
+//  Copyright © 2016年 muios. All rights reserved.
+//
+
+#ifdef __OBJC__
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#import "UIView+Extension.h"
+#import "UIBarButtonItem+Extension.h"
+#import "UINavigationItem+XRZItemTitle.h"
+
+
+// 通知中心
+#define XRZNotificationCenter [NSNotificationCenter defaultCenter]
+
+#ifdef DEBUG // 处于开发阶段
+#define XRZLog(...) NSLog(__VA_ARGS__)
+#else // 处于发布阶段
+#define XRZLog(...)
+#endif
+
+// RGB颜色
+#define HWColor(r, g, b) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1.0]
+
+// 随机色
+#define HWRandomColor HWColor(arc4random_uniform(256), arc4random_uniform(256), arc4random_uniform(256))
+
+#define ScreenW [UIScreen mainScreen].bounds.size.width
+#define ScreenH [UIScreen mainScreen].bounds.size.height
+
+#define AppKey @"7fef6171469e80d32c0559f88b377245"
+
+
+
+#endif
+
