@@ -11,14 +11,14 @@
 @implementation XRZBtn
 
 - (void)awakeFromNib {
-    self.titleLabel.textAlignment = NSTextAlignmentCenter;
-    self.imageView.contentMode = UIViewContentModeRight;
+    self.titleLabel.textAlignment = NSTextAlignmentLeft;
+    self.imageView.contentMode = UIViewContentModeScaleAspectFill;
 }
 - (CGRect)titleRectForContentRect:(CGRect)contentRect {
-    return CGRectMake(self.frame.size.width - 65,5,50, 30);
+    return CGRectMake(self.frame.size.width - 70,5,50, 30);
 }
 - (CGRect)imageRectForContentRect:(CGRect)contentRect {
-    return CGRectMake(self.frame.size.width - 22,17,10, 8);
+    return CGRectMake(self.frame.size.width - 22,18,8, 5);
 }
 
 @end

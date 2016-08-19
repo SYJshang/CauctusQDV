@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "XRZCommonModel.h"
+
 
 @interface XRZTestController : UIViewController
+
+@property (nonatomic, strong) XRZCommonModel *commonModel;
 
 @end

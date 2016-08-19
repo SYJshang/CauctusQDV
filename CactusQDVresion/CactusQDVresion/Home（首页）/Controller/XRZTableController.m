@@ -22,6 +22,7 @@
 #import "DataManager.h"
 #import "AFNetworking.h"
 #import "WBHttpTool.h"
+#import "XRZDeatilController.h"
 
 
 #define URL @"http://api.xrzmall.com/api2/member_info.php"
@@ -49,7 +50,7 @@
 @property (nonatomic, strong) NSMutableArray *picArray;
 @property (nonatomic, strong) NSString *gonggao;
 
-@property (nonatomic, strong)  MBProgressHUD *hud;
+@property (nonatomic, strong) MBProgressHUD *hud;
 
 
 @end
@@ -68,6 +69,7 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [self.adView beginScroll];
 //    self.navigationController.navigationBar.hidden = YES;
 }
 
@@ -78,8 +80,8 @@
 }
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
     
+    [super viewDidLoad];
     
     self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
@@ -87,9 +89,8 @@
 //    self.hud.mode = MBProgressHUDModeAnnularDeterminate;
     self.hud.labelText = NSLocalizedString(@"正在加载...", @"正在加载");
     
-
     
-    self.view.backgroundColor = HWColor(245, 245, 245);
+    self.view.backgroundColor = HWColor(240, 240, 240);
     self.navigationItem.titleView = [UILabel titleWithColor:[UIColor whiteColor] title:@"首页" font:20];
     
     self.navigationController.navigationBar.hidden = NO;
@@ -142,7 +143,6 @@
 - (UIStatusBarStyle)preferredStatusBarStyle{
     
     return UIStatusBarStyleLightContent;
-    
 }
 
 
@@ -190,12 +190,6 @@
         //banner2.titlesGroup = titles;
         [self.view addSubview:banner2];
         
-        
-        //添加下拉刷新
-        UIRefreshControl *refresh = [[UIRefreshControl alloc] init];
-        [refresh addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
-        
-        
         //设置公告
         [self setAnnouncement:banner2];
         
@@ -204,27 +198,24 @@
     }];
     
 }
-//下拉刷新
--(void)refresh:(UIRefreshControl *)refresh
-{
-    [refresh performSelector:@selector(endRefreshing) withObject:nil afterDelay:2];
-}
+
 
 //设置公告
 - (void)setAnnouncement:(SDCycleScrollView *)sender{
     
     //公告图片
-    UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(sender.frame) + 8, 20, 20)];
+    UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(sender.frame) + 5, 20, 20)];
     [self.view addSubview:imageView];
     imageView.image = [UIImage imageNamed:@"主页_活动公告"];
     //公告内容
 //    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(25, CGRectGetMaxY(sender.frame) + 5, ScreenW - 25, 0.075 * (ScreenH - 64 - 49) - 10)];
 //    [self.view addSubview:label];
     
-      NSString *text = [NSString stringWithFormat:@"%@",self.gonggao];
+    NSString *text = [NSString stringWithFormat:@"%@",self.gonggao];
     
-    LSPaoMaView *paoma = [[LSPaoMaView alloc]initWithFrame:CGRectMake(25, CGRectGetMaxY(sender.frame) + 5, ScreenW - 25, 0.075 * (ScreenH - 64 - 49) - 10) title:text];
+    LSPaoMaView *paoma = [[LSPaoMaView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(sender.frame) + 5, ScreenW - 25, 20) title:text];
     [self.view addSubview:paoma];
+    paoma.sd_layout.centerXEqualToView(imageView).leftSpaceToView(imageView,5).rightSpaceToView(self.view,20).heightIs(20);
 
   
 
@@ -296,7 +287,7 @@
     [profile addSubview:icon];
     icon.sd_layout.heightIs(15).widthIs(15).leftSpaceToView(profeession,0).centerYEqualToView(profeession);
 //    icon.layer.masksToBounds = YES;
-//    icon.layer.cornerRadius = icon.width / 2;
+//    icon.layer.cornerRadius  = icon.width / 2;
     //认证结果
     UILabel *messige = [[UILabel alloc]init];
     messige.font = [UIFont systemFontOfSize:13];
@@ -328,7 +319,7 @@
     UIImageView *goin = [[UIImageView alloc]init];
     goin.image = [UIImage imageNamed:@"主页_进入"];
     [profile addSubview:goin];
-    goin.sd_layout.rightSpaceToView(profile,10).centerYEqualToView(icon).heightIs(20).widthIs(15);
+    goin.sd_layout.rightSpaceToView(profile,10).centerYEqualToView(icon).heightIs(25).widthIs(15);
     
     UIView *line = [[UIView alloc]init];
     line.backgroundColor = [UIColor grayColor];
@@ -336,7 +327,7 @@
 
     line.frame = CGRectMake(0, CGRectGetMaxY(profile.frame), ScreenW, 1);
     //订单数量
-    
+
     //已抢到数量
     UILabel *num1 = [[UILabel alloc]init];
     num1.textAlignment = NSTextAlignmentCenter;
@@ -431,8 +422,8 @@
     
     
     
-    UIView *superImgAndBtn = [[UIView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(line1.frame), ScreenW, 0.4 * (ScreenH - 64 - 49))];
-    superImgAndBtn.backgroundColor = HWColor(245, 245, 245);
+    UIView *superImgAndBtn = [[UIView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(line1.frame), ScreenW, 0.4 * (ScreenH - 64))];
+    superImgAndBtn.backgroundColor = HWColor(250, 250, 250);
     [self.view addSubview:superImgAndBtn];
     
     //添加抢单按钮
@@ -440,7 +431,7 @@
     onoff.image = [UIImage imageNamed:@"普通开关_bg灰"];
     [superImgAndBtn addSubview:onoff];
     onoff.userInteractionEnabled = YES;
-    onoff.frame = CGRectMake(ScreenW / 5.0, superImgAndBtn.frame.size.height / 3.0 - 20,  (3 *ScreenW) / 5.0, superImgAndBtn.frame.size.height / 3.0  - 10);
+    onoff.frame = CGRectMake(ScreenW / 6.0, superImgAndBtn.frame.size.height / 3.0 - 20,  (2 *ScreenW) / 3.0, superImgAndBtn.frame.size.height / 3.0  - 10);
     self.grapImage = onoff;
     
     
@@ -451,51 +442,50 @@
     UISwipeGestureRecognizer *on = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(tapGester:)];
     on.direction = (UISwipeGestureRecognizerDirectionRight )| (UISwipeGestureRecognizerDirectionLeft);
     [self.grapImage addGestureRecognizer:on];
-//
+    
     [btn addTarget:self action:@selector(clik) forControlEvents:UIControlEventTouchUpInside];
     
-//    btn.sd_layout.leftSpaceToView(onoff,0).topSpaceToView(onoff,0).widthRatioToView(onoff,0.5).heightRatioToView(ono
     btn.frame = CGRectMake(0, 0, onoff.width / 2, onoff.height);
     
     self.grapBtn = btn;
     
+    NSArray *array = @[@"陈先生 抢到 李女士 的装修订单  \n平台累计成交量上升至6666单",@"张先生 抢到 李女士 的装修订单 \n平台累计成交量上升至7777单",@"李先生 抢到 李女士 的装修订单 \n平台累计成交量上升至7777单",@"马先生 抢到 李女士 的装修订单 \n平台累计成交量上升至7777单"];
     
-
     
-    
-
-    
-    NSArray *array = @[@"陈先生 抢到 李女士 的装修订单  平台累计成交量上升至6666单",@"张先生 抢到 李女士 的装修订单 平台累计成交量上升至7777单",@"李先生 抢到 李女士 的装修订单 平台累计成交量上升至7777单",@"马先生 抢到 李女士 的装修订单 平台累计成交量上升至7777单"];
-    
-    FJAdView * view = [[FJAdView alloc]initWithTitles:array];
+    FJAdView *view = [[FJAdView alloc]initWithTitles:array];
     view.backgroundColor = [UIColor clearColor];
     view.textAlignment = NSTextAlignmentCenter;//默认
     //    view.isHaveHeadImg = YES;
     view.isHaveTouchEvent = YES;
-    view.labelFont = [UIFont systemFontOfSize:15];
-    view.color = [UIColor blackColor];
+    view.labelFont = [UIFont systemFontOfSize:13.0];
+    view.color = [UIColor redColor];
     view.time = 2.0f;
     [superImgAndBtn addSubview:view];
     self.adView = view;
     view.sd_layout.leftEqualToView(onoff).rightEqualToView(onoff).topSpaceToView(onoff,30).heightIs(40);
     [self.adView beginScroll];
+    
+    
+    UIView *bomttomLine = [[UIView alloc]init];
+    bomttomLine.backgroundColor = [UIColor grayColor];
+    [self.view addSubview:bomttomLine];
+    bomttomLine.sd_layout.leftSpaceToView(self.view,0).rightSpaceToView(self.view,0).bottomSpaceToView(self.view,50).heightIs(1);
 
 }
 
 
-
-
 - (void)action:(UITapGestureRecognizer *)sender{
     
-    [self.navigationController pushViewController:[XRZTestController new] animated:YES];
+    
+    XRZDeatilController *vc = [[XRZDeatilController alloc]init];
+    vc.commonModel = self.commonModel;
+    [self.navigationController pushViewController:vc animated:YES];
     
 }
 
 
 #pragma mark - 手势
 - (void)tapGester:(UISwipeGestureRecognizer *)gerster{
-    
-    
     
     XRZLog(@".........");
     

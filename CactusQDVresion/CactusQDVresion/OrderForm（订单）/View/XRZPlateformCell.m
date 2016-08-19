@@ -33,13 +33,15 @@
         cutdown1.font = [UIFont systemFontOfSize:14];
         cutdown1.textColor = [UIColor blackColor];
         self.position = cutdown1;
-        self.position.sd_layout.leftSpaceToView(self.bigView,10).topSpaceToView(self.name,5).widthIs(60).heightIs(20);
+        self.position.sd_layout.leftSpaceToView(self.bigView,10).topSpaceToView(self.name,10).widthIs(60).heightIs(20);
         
         UIImage *icon = [UIImage imageNamed:@"工人"];
         UIImageView *sm = [[UIImageView alloc]initWithImage:icon];
         [self.contentView addSubview:sm];
         self.smallImage = sm;
         self.smallImage.sd_layout.leftSpaceToView(self.position,0).centerYEqualToView(self.position).widthIs(15).heightIs(15);
+        self.smallImage.layer.masksToBounds = YES;
+        self.smallImage.layer.cornerRadius = 5;
         
         UILabel *ad = [[UILabel alloc]init];
         [self.contentView addSubview:ad];
@@ -47,6 +49,7 @@
         ad.textColor = [UIColor blackColor];
         ad.textAlignment = NSTextAlignmentRight;
         self.adress = ad;
+        self.adress.textColor = [UIColor grayColor];
         self.adress.sd_layout.rightSpaceToView(self.contentView,10).bottomEqualToView(self.name).widthIs((250.0 / 750.0)*ScreenW).heightIs(20);
         
         UILabel *a = [[UILabel alloc]init];
@@ -55,13 +58,14 @@
         a.textColor = [UIColor blackColor];
         a.textAlignment = NSTextAlignmentRight;
         self.area = a;
+        self.area.textColor = [UIColor grayColor];
         self.area.sd_layout.rightSpaceToView(self.contentView,10).topSpaceToView(self.adress,10).widthIs((250.0 / 750.0)*ScreenW).heightIs(20);
         
         self.line = [[UIView alloc]init];
-        self.line.backgroundColor = [UIColor grayColor];
+        self.line.backgroundColor = HWColor(220, 220, 220);
         [self.contentView addSubview:self.line];
 //        self.line = view;
-        self.line.sd_layout.leftSpaceToView(self.contentView,10).rightSpaceToView(self.contentView,10).topSpaceToView(self.bigView,20).heightIs(0.7);
+        self.line.sd_layout.leftSpaceToView(self.contentView,10).rightSpaceToView(self.contentView,10).topSpaceToView(self.bigView,20).heightIs(0.5);
         
         UILabel *t = [[UILabel alloc]init];
         [self.contentView addSubview:t];
@@ -78,9 +82,6 @@
         sta.textAlignment = NSTextAlignmentCenter;
         self.state = sta;
         self.state.sd_layout.rightSpaceToView(self.contentView,10).topEqualToView(self.time).widthIs((160.0 / 750.0) * ScreenW).heightRatioToView(self.time,1);
-        
-
-        
     }
     return self;
 }

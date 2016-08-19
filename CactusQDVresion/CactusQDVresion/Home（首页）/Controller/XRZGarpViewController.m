@@ -32,13 +32,15 @@
 @property (strong, nonatomic)  UIView *topBG;
 @property (strong, nonatomic)  UIView *iconBG;
 
+@property (nonatomic, strong) CABasicAnimation *rotationAnimation;;
+
 @end
 
 @implementation XRZGarpViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor grayColor];
     
     
     [self setNavition];
@@ -51,12 +53,18 @@
     
     NSTimeInterval delayInterval = [[NSDate date] timeIntervalSince1970] + 60;
     [[JPTimeTickManager shareTickManager]addTimeTickLabel:self.timeLab withExpiresTime:delayInterval prefix:@"" withExpiresHandler:^(JPTimeTickObj *obj) {
-        XRZLog(@"我是 , obj:%@", obj);
+//        XRZLog(@"我是 , obj:%@", obj);
     }];
     
     
     
     // Do any additional setup after loading the view from its nib.
+}
+
+- (void)viewDidDisappear:(BOOL)animated{
+    
+    [super viewDidDisappear:animated];
+    [[JPTimeTickManager shareTickManager]removeTimeTickLabel:self.timeLab];
 }
 
 - (void)setAutoutlaout{
@@ -69,7 +77,7 @@
     UIView *view = [[UIView alloc]init];
     view.frame = CGRectMake(0, 0, 0, 0);
     [self.view addSubview:view];
-    view.backgroundColor = HWColor(72, 204, 122);
+    view.backgroundColor = HWColor(63, 203, 125);
     self.topBG = view;
     self.topBG.sd_layout.leftSpaceToView(self.view,0).rightSpaceToView(self.view,0).topSpaceToView(self.view,64).heightIs(topView - 64);
 //
@@ -81,26 +89,24 @@
     self.stopWatchbg.sd_layout.centerXEqualToView(self.topBG).topSpaceToView(self.topBG,20).widthIs(0.7 * (topView - 64)).heightIs(0.7 * (topView - 64));
 
     //秒表中间背景
-
     UIImage *watchBtween = [UIImage imageNamed:@"秒表_01"];
     UIImageView *btween = [[UIImageView alloc]initWithImage:watchBtween];
     [self.topBG addSubview:btween];
     self.stopWatch = btween;
     self.stopWatch.sd_layout.leftEqualToView(self.stopWatchbg).rightEqualToView(self.stopWatchbg).topEqualToView(self.stopWatchbg).heightRatioToView(self.stopWatchbg,1);
 
-    //    秒表进度条
+    //秒表进度条
     UIImage *progress = [UIImage imageNamed:@"秒表_进度条"];
     UIImageView *pro = [[UIImageView alloc]initWithImage:progress];
     [self.topBG addSubview:pro];
     self.watchProceas = pro;
     self.watchProceas.sd_layout.leftEqualToView(self.stopWatchbg).rightEqualToView(self.stopWatchbg).topEqualToView(self.stopWatchbg).heightRatioToView(self.stopWatchbg,1);
-    CABasicAnimation* rotationAnimation;
-    rotationAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
-    rotationAnimation.toValue = [NSNumber numberWithFloat: M_PI * 2.0 ];
-    rotationAnimation.duration = 60;
-    rotationAnimation.cumulative = YES;
-    rotationAnimation.repeatCount = 1;
-    [self.watchProceas.layer addAnimation:rotationAnimation forKey:@"rotationAnimation"];
+    _rotationAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
+    _rotationAnimation.toValue = [NSNumber numberWithFloat: M_PI * 2.0 ];
+    _rotationAnimation.duration = 60;
+    _rotationAnimation.cumulative = YES;
+    _rotationAnimation.repeatCount = 1;
+    [self.watchProceas.layer addAnimation:_rotationAnimation forKey:@"rotationAnimation"];
     
     
     //填充背景
@@ -147,7 +153,7 @@
     self.iconImage = iconImage;
     
     
-    self.iconImage.sd_layout.leftSpaceToView(self.iconBG,30).centerYEqualToView(self.iconBG).widthIs(0.25 * ScreenW).heightIs(0.25 * ScreenW);
+    self.iconImage.sd_layout.leftSpaceToView(self.iconBG,20).centerYEqualToView(self.iconBG).widthIs(0.25 * ScreenW).heightIs(0.25 * ScreenW);
     iconImage.layer.masksToBounds = YES;
     iconImage.layer.cornerRadius = iconImage.height / 2;
     
@@ -155,9 +161,9 @@
     //名字
     UILabel *nameLab = [[UILabel alloc]init];
     [self.view addSubview:nameLab];
-    nameLab.font = [UIFont systemFontOfSize:18];
+    nameLab.font = [UIFont systemFontOfSize:16];
     nameLab.textColor = [UIColor blackColor];
-    nameLab.text = @"一一一一 先生正在请求装修...";
+    nameLab.text = @"xxxx先生正在请求装修...";
     self.nameLabel = nameLab;
     [self.iconBG addSubview:nameLab];
     self.nameLabel.sd_layout.leftSpaceToView(self.iconImage,10).rightSpaceToView(self.iconBG,5).topSpaceToView(self.iconBG,self.iconBG.height / 2 - 30).heightIs(20);
@@ -165,7 +171,7 @@
     //描述信息
     UILabel *descLa = [[UILabel alloc]init];
     [self.view addSubview:descLa];
-    descLa.font = [UIFont systemFontOfSize:18];
+    descLa.font = [UIFont systemFontOfSize:16];
     descLa.textColor = [UIColor blackColor];
     descLa.text = @"该客户距离您当前位置5.2km";
     self.distance = descLa;
@@ -247,20 +253,23 @@
     [self.navigationController popViewControllerAnimated:YES];
     
 }
-- (void)btnClick:(UIButton *)sender {
+- (void)btnClick:(UIButton *)sender{
+    
     XRZLog(@"...........");
     
-    
-    
+    [[JPTimeTickManager shareTickManager]removeTimeTickLabel:self.timeLab];
+//    [self.watchProceas.layer addAnimation:_rotationAnimation forKey:@"rotationAnimation"];
+    [self.watchProceas.layer removeAllAnimations];
 
     XRZAlertView *alter = [XRZAlertView showInView:self.view withTitle:@"成功抢单" message:@"同样抢单成功的有三个" confirmButtonTitle:@"查看详细信息" cancelButtonTitle:@"我知道了"];
     [alter handleCancel:^{
         XRZLog(@"I Know");
+
     } handleConfirm:^{
         XRZLog(@"查看详细信息");
     }];
     
     [alter show];
-    
+
 }
 @end

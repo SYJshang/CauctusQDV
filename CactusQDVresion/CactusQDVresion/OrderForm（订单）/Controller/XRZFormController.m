@@ -43,15 +43,13 @@
     [self.imageNames addObject:@"图片1"];
     [self.imageNames addObject:@"图片2"];
     [self.imageNames addObject:@"图片3"];
-
-    
 }
 
 
 - (void)setNavition{
     
     
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor     = [UIColor whiteColor];
     self.navigationItem.titleView = [UILabel titleWithColor:[UIColor whiteColor] title:@"交易订单" font:20];
     
     //左边naVBar
@@ -85,7 +83,7 @@
     [self.icon1.layer setBorderWidth:3];
     
     //图片2
-    UIImage *image1       = [UIImage imageNamed:@"95G58PIC4qb_1024"];
+    UIImage *image1 = [UIImage imageNamed:@"95G58PIC4qb_1024"];
     self.icon2 = [[UIImageView alloc]initWithImage:image1];
     [self.view addSubview:self.icon2];
     self.icon2.sd_layout.centerYEqualToView(self.icon1).rightSpaceToView(self.view,(1.0 / 10.0) * ScreenW).heightIs(widthIocn * ScreenW).widthIs(widthIocn * ScreenW);
@@ -219,7 +217,6 @@
     [self.btnBG addSubview:self.rightLine];
     self.rightLine.backgroundColor = [UIColor blackColor];
     self.rightLine.sd_layout.leftSpaceToView(self.titleLab,10).rightSpaceToView(self.btnBG,10).centerYEqualToView(self.titleLab).heightIs(1);
-    
     
     //btn
     self.startWork = [UIButton buttonWithType:UIButtonTypeCustom];

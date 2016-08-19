@@ -31,7 +31,7 @@
     return obj;
 }
 
-- (JPTimeLabelObj*)removeTimeTickLabel:(UILabel*)label {
+- (JPTimeLabelObj*)removeTimeTickLabel:(UILabel *)label {
     for (JPTimeTickObj *obj in self.tickObjs) {
         if ([obj isKindOfClass:[JPTimeLabelObj class]]) {
             JPTimeLabelObj *tlObj = (JPTimeLabelObj*)obj;

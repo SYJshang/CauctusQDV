@@ -20,6 +20,7 @@
         _scr = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, selfWidth, selfHeight)];
         _scr.contentSize = CGSizeMake(selfWidth * count, selfHeight);
         _scr.pagingEnabled = YES;
+        _scr.bounces = NO;
         _scr.delegate = self;
         int i = 0;
         for (UIView *view in viewArray) {

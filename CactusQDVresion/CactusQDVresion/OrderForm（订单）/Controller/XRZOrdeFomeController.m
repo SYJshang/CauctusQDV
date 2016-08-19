@@ -11,10 +11,7 @@
 #import "XRZPlateformCell.h"
 #import "XRZFormController.h"
 #import "XRZBtn.h"
-//#import "DSConfig.h"
-//#import "ViewFilterSingle.h"
-//#import "ViewFilterDouble.h"
-//#import "FilterViewTool.h"
+
 
 #define FILTERCONTENTHIGHT 266
 
@@ -51,7 +48,7 @@
     
     self.navigationItem.titleView = [UILabel titleWithColor:[UIColor whiteColor] title:@"平台总订单" font:20];
     
-    UITableView *tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 104, ScreenW, ScreenH - 104 - 44) style:UITableViewStylePlain];
+    UITableView *tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 104, ScreenW, ScreenH - 104 - 48) style:UITableViewStylePlain];
     self.table = tableView;
     self.table.delegate = self;
     self.table.dataSource = self;
@@ -74,8 +71,8 @@
     btn.backgroundColor = [UIColor whiteColor];
     [btn addTarget:self action:@selector(onClickButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     self.manger = btn;
+    [self.manger setBackgroundColor:HWColor(245, 245, 245)];
     [_manger setTitleColor:HWColor(63, 203, 125)forState:UIControlStateNormal];
-//    [_manger setTitleColor: HWColor(63, 203, 125) forState:UIControlStateSelected];
     _manger.titleLabel.font = [UIFont systemFontOfSize:14];
     _manger.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
     
@@ -89,12 +86,12 @@
     btn1.tag = 2;
     [btn1 addTarget:self action:@selector(onClickButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     self.company = btn1;
+    [self.company setBackgroundColor:HWColor(245, 245, 245)];
     [self.company setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     [self.company setTitleColor: HWColor(63, 203, 125) forState:UIControlStateSelected];
     self.company.titleLabel.font = [UIFont systemFontOfSize:14];
     self.company.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
-//
-//    
+   
     UIButton *btn2 = [UIButton buttonWithType:UIButtonTypeCustom];
     [btn2 setTitle:@"设计师" forState:UIControlStateNormal];
     [btn2 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -104,34 +101,32 @@
     btn2.tag = 3;
     [btn2 addTarget:self action:@selector(onClickButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     self.stylist = btn2;
+    [self.stylist setBackgroundColor:HWColor(245, 245, 245)];
     [self.stylist setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     [self.stylist setTitleColor: HWColor(63, 203, 125) forState:UIControlStateSelected];
     self.stylist.titleLabel.font = [UIFont systemFontOfSize:14];
     self.stylist.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
 
-    
     XRZBtn *btn3 = [XRZBtn buttonWithType:UIButtonTypeCustom];
     [btn3 setTitle:@"工人" forState:UIControlStateNormal];
     [btn3 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     btn3.frame = CGRectMake(3 * ScreenW / 4, 60, ScreenW / 4, 44);
     btn3.backgroundColor = [UIColor whiteColor];
-//    [btn3 setImageEdgeInsets:UIEdgeInsetsMake(11,68,11, 0)];
-//    [btn3 setTitleEdgeInsets:UIEdgeInsetsMake(11,0, 11, 30)];
     [btn3 setImage:[UIImage imageNamed:@"下拉箭头"] forState:UIControlStateNormal];
     [btn3 setImage:[UIImage imageNamed:@"形状-4"] forState:UIControlStateSelected];
+    [btn3 setImageEdgeInsets:UIEdgeInsetsMake(11, 75, 11, 0)];
+    [btn3 setContentMode:UIViewContentModeScaleToFill];
     [self.view addSubview:btn3];
-    
-    
     btn3.tag = 4;
     [btn3 addTarget:self action:@selector(onClickButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     self.workers = btn3;
+    [self.workers setBackgroundColor:HWColor(245, 245, 245)];
     [self.workers setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     [self.workers setTitleColor: HWColor(63, 203, 125) forState:UIControlStateSelected];
     self.workers.titleLabel.font = [UIFont systemFontOfSize:14];
     self.workers.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
 
     //添加中间view
-    
     for (int i = 0; i < 4; i ++) {
         UIView *view = [[UIView alloc]initWithFrame:CGRectMake((i + 1) * (ScreenW / 4), 70, 1, 20)];
         [view setBackgroundColor:[UIColor grayColor]];
@@ -172,7 +167,6 @@
                 [self.manger setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
                 self.stylist.selected = NO;
                 self.workers.selected = NO;
-
             }
         }
             break;
@@ -205,7 +199,7 @@
                 UIView *view = [[UIView alloc]init];
                 view.frame = CGRectMake(0, 104, ScreenW, 200);
                 [self.view addSubview:view];
-                view.backgroundColor = HWColor(241, 241, 241);
+                view.backgroundColor = HWColor(240, 240, 240);
                 self.btnBG = view;
             
                 NSArray *arr = @[@"水电工",@"泥工",@"木工",@"油漆工"];
@@ -215,7 +209,8 @@
                     [btn setTitle:arr[i] forState:UIControlStateNormal];
                     [btn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
                     [btn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-                    [btn setTitleColor: HWColor(63, 203, 125) forState:UIControlStateSelected];                    btn.backgroundColor = HWColor(241, 241, 241);
+                    [btn setTitleColor: HWColor(63, 203, 125) forState:UIControlStateSelected];
+                    [btn setBackgroundColor:HWColor(240, 240, 240)];
                     btn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
                     btn.titleLabel.font = [UIFont systemFontOfSize:14];
                     btn.tag = 100 + i;
@@ -282,16 +277,16 @@
     return 1;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
     return 10;
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
     UIView *view = [[UIView alloc]init];
     view.frame = CGRectMake(0, 0, ScreenW, 10);
-    view.backgroundColor = HWColor(242, 242, 242);
+    view.backgroundColor = HWColor(235, 235, 235);
 //    self.table.tableHeaderView = view;
     return view;
 }
@@ -314,6 +309,7 @@
     cell.state.layer.masksToBounds   = YES;
     cell.state.layer.cornerRadius    = 12;
     cell.selectionStyle = NO;
+//  cell.backgroundColor = HWColor(245, 245, 245);
     return cell;
 }
 

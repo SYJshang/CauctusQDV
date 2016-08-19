@@ -51,17 +51,7 @@
         cell = [[XRWorkerCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
       
     }
-    
-    
-//    
-//    if (cell.isSelect) {
-//        cell.textLabel.textColor = HWColor(63, 202,125);
-//    }else{
-//        cell.textLabel.textColor = HWColor(156, 156, 156);
-//    }
-//    
-//    NSArray *array = @[@"水电工",@"木工",@"油漆工",@"泥工"];
-//    cell.textLabel.text = array[indexPath.row];
+
     return cell;
 }
 
@@ -74,7 +64,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-//    kTipAlert(@"<%ld> selected...", indexPath.row);
+
 }
 
 

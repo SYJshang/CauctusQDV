@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface XRZSetMealController : UITableViewController
+@interface XRZSetMealController : UIViewController
 
 @end

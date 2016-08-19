@@ -15,6 +15,12 @@
 #import "XRZTableController.h"
 #import "XRZTabBarController.h"
 
+
+#define SendNumURL @"http://api.xrzmall.com/api2/get_msgcode.php"
+#define RegistURL @"http://api.xrzmall.com/api2/user_regist.php"
+#define LoginURL @"http://api.xrzmall.com/api2/user_login.php"
+
+
 @interface XRZLoginIDController ()<UITableViewDelegate,UITableViewDataSource>{
     NSMutableDictionary *_parameter;
     NSMutableDictionary *_LogAndRegparameter;
@@ -247,26 +253,43 @@
     _parameter = [[NSMutableDictionary alloc]init];
     [_parameter setObject:AppKey forKey:@"pwdstr"];
     [_parameter setObject:[NSString stringWithFormat:@"%@",self.numID.text] forKey:@"mobile"];
-    XRZLog(@"%@",_parameter);
-    
+    if ([self.position.text isEqualToString:@"设计师"]) {
+        [_parameter setObject:@"memtype-3" forKey:@"mem_type"];
+    }else if ([self.position.text isEqualToString:@"项目经理"]){
+        [_parameter setObject:@"memtype-4" forKey:@"mem_type"];
+        
+    }else if ([self.position.text isEqualToString:@"工人"]){
+        [_parameter setObject:@"memtype-5" forKey:@"mem_type"];
+    }
     //获取验证码请求
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/html",@"text/json",@"text/javascript",@"text/plain", nil];
-    [manager POST:@"http://api.xrzmall.com/api2/get_msgcode.php" parameters:_parameter progress:^(NSProgress * _Nonnull uploadProgress) {
-        XRZLog(@"%@",uploadProgress);
+    [manager POST:SendNumURL parameters:_parameter progress:^(NSProgress * _Nonnull uploadProgress) {
+
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         NSError *error;
         NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:&error];
-        XRZLog(@">>>>>%@",error);
         
         XRZLog(@">>>>>%@",dict);
         
         NSInteger str = [[dict valueForKey:@"errcode"] integerValue];
         
         XRZLog(@".............%ld",(long)str);
+        
+        
+        if (str == 100033) {
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"该手机号已注册,请输入其他手机号" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                
+            }];
+            [alert addAction:action];
+            [self presentViewController:alert animated:YES completion:^{
+                
+            }];
+        }
         
         
         //判断手机格式是否正确
@@ -298,7 +321,7 @@
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         XRZLog(@">>>>>>>>>>>>>%@",error);
         
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"获取验证码失败" message:@"请重新获取" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"请重新获取" message:@"获取验证码失败" preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             
         }];
@@ -346,7 +369,7 @@
         AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
         
         manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/html",@"text/json",@"text/javascript",@"text/plain", nil];
-        [manager POST:@"http://api.xrzmall.com/api2/user_regist.php" parameters:_LogAndRegparameter progress:^(NSProgress * _Nonnull uploadProgress) {
+        [manager POST:RegistURL parameters:_LogAndRegparameter progress:^(NSProgress * _Nonnull uploadProgress) {
             XRZLog(@"%@",uploadProgress);
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             XRZLog(@"<<<<<<<   注册成功 >>>>>>>>>>%@",responseObject);
@@ -385,7 +408,7 @@
                 [_LogAndRegparameter setObject:[NSString stringWithFormat:@"%@",self.password.text] forKey:@"accpass"];
             }
             man.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/html",@"text/json",@"text/javascript",@"text/plain", nil];
-            [man POST:@"http://api.xrzmall.com/api2/user_login.php" parameters:_dict progress:^(NSProgress * _Nonnull uploadProgress) {
+            [man POST:LoginURL parameters:_dict progress:^(NSProgress * _Nonnull uploadProgress) {
                 XRZLog(@"%@",uploadProgress);
             } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
                 XRZLog(@"<<<<<<<<  登录成功  >>>>>>>>>>>%@",responseObject);

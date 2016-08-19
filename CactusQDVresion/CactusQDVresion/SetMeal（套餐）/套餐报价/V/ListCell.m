@@ -1,14 +1,14 @@
 //
-//  XRZMealCell.m
-//  仙人掌抢单般
+//  ListCell.m
+//  CactusHomeFurnish
 //
-//  Created by apple on 16/4/13.
-//  Copyright © 2016年 muios. All rights reserved.
+//  Created by zhuxunyi on 16/5/6.
+//  Copyright © 2016年 muyou. All rights reserved.
 //
 
-#import "XRZMealCell.h"
+#import "ListCell.h"
 
-@implementation XRZMealCell
+@implementation ListCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];

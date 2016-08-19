@@ -19,7 +19,6 @@
 #import "AreaPickerView.h"
 #import "UIView+SDAutoLayout.h"
 #import "XRZAlertView.h"
-#import "XRZCommonModel.h"
 #import "UIImageView+WebCache.h"
 
 
@@ -36,7 +35,7 @@
     //图片2进制路径
     NSString *filePath;
     
-    XRZCommonModel *commonModel;
+    
 }
 
 @property (nonatomic, strong) UITableView *tableView;
@@ -102,7 +101,6 @@ static NSString *cellIdentifier = @"MTCell";
 - (void)setNavition{
     
     self.navigationItem.titleView = [UILabel titleWithColor:[UIColor whiteColor] title:@"用户验证" font:20];
-
     
     //左边naVBar
     UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 5, 20,20)];
@@ -146,9 +144,8 @@ static NSString *cellIdentifier = @"MTCell";
         
         SaveNameFirstCell *cell = [tableView dequeueReusableCellWithIdentifier:@"first" forIndexPath:indexPath];
         
-
         //判断是否实名
-        if (commonModel.appreal == 0) {
+        if (_commonModel.appreal == 0) {
             
             cell.titleText.text = self.dataSoucre[indexPath.row];
             cell.textField.placeholder = self.placeHoldArray[indexPath.row];
@@ -157,7 +154,7 @@ static NSString *cellIdentifier = @"MTCell";
             
             cell.titleText.text = self.dataSoucre[indexPath.row];
             cell.textField.placeholder = self.placeHoldArray[indexPath.row];
-            cell.textField.text = commonModel.truename;
+            cell.textField.text = _commonModel.truename;
         }
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -166,7 +163,7 @@ static NSString *cellIdentifier = @"MTCell";
     }else if (indexPath.row == 1) {
         SaveNameFirstCell *cell = [tableView dequeueReusableCellWithIdentifier:@"first" forIndexPath:indexPath];
         //判断是否有身份证号
-        if (commonModel.appreal == 0) {
+        if (_commonModel.appreal == 0) {
             cell.titleText.text = self.dataSoucre[indexPath.row];
             cell.textField.placeholder = self.placeHoldArray[indexPath.row];
         }else{
@@ -181,13 +178,13 @@ static NSString *cellIdentifier = @"MTCell";
     }else if (indexPath.row == 2) {
         //判断是否有手机号
         SaveNameFirstCell *cell = [tableView dequeueReusableCellWithIdentifier:@"first" forIndexPath:indexPath];
-        if (commonModel.appreal == 0) {
+        if (_commonModel.appreal == 0) {
             cell.titleText.text = self.dataSoucre[indexPath.row];
             cell.textField.placeholder = self.placeHoldArray[indexPath.row];
         }else{
             cell.titleText.text = self.dataSoucre[indexPath.row];
             cell.textField.placeholder = self.placeHoldArray[indexPath.row];
-            cell.textField.text = commonModel.mobile;
+            cell.textField.text = _commonModel.mobile;
         }
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -195,16 +192,16 @@ static NSString *cellIdentifier = @"MTCell";
     }else if (indexPath.row == 3) {
         //判断是哪个类型
         SaveNameSixCell *cell = [tableView dequeueReusableCellWithIdentifier:@"six"];
-        if ([commonModel.memtype isEqualToString:@"memtype-2"]) {
+        if ([_commonModel.memtype isEqualToString:@"memtype-2"]) {
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.desc.text = @"装修公司";
-        }else if ([commonModel.memtype isEqualToString:@"memtype-3"]){
+        }else if ([_commonModel.memtype isEqualToString:@"memtype-3"]){
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.desc.text = @"设计师";
-        }else if ([commonModel.memtype isEqualToString:@"memtype-4"]){
+        }else if ([_commonModel.memtype isEqualToString:@"memtype-4"]){
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.desc.text = @"项目经理";
-        }else if ([commonModel.memtype isEqualToString:@"memtype-5"]){
+        }else if ([_commonModel.memtype isEqualToString:@"memtype-5"]){
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.desc.text = @"工人";
         }
@@ -218,34 +215,34 @@ static NSString *cellIdentifier = @"MTCell";
         
 //        XRZLog(@"......%@",rect);
         
-        if (commonModel.appreal == 0) {
+        if (_commonModel.appreal == 0) {
             [cell.chooseBtn addTarget:self action:@selector(chooseTable:) forControlEvents:UIControlEventTouchUpInside];
             [cell.chooseBtn setTitle:@"1年" forState:UIControlStateNormal];
 
 
         }else{
         
-        if ([commonModel.workage isEqualToString:@"workage-1"]) {
+        if ([_commonModel.workage isEqualToString:@"workage-1"]) {
             [cell.chooseBtn addTarget:self action:@selector(chooseTable:) forControlEvents:UIControlEventTouchUpInside];
             
             [cell.chooseBtn setTitle:@"1年" forState:UIControlStateNormal];
-        }else if ([commonModel.workage isEqualToString:@"workage-2"]){
+        }else if ([_commonModel.workage isEqualToString:@"workage-2"]){
             [cell.chooseBtn addTarget:self action:@selector(chooseTable:) forControlEvents:UIControlEventTouchUpInside];
             
             [cell.chooseBtn setTitle:@"1-3年" forState:UIControlStateNormal];
-        }else if ([commonModel.workage isEqualToString:@"workage-3"]){
+        }else if ([_commonModel.workage isEqualToString:@"workage-3"]){
             [cell.chooseBtn addTarget:self action:@selector(chooseTable:) forControlEvents:UIControlEventTouchUpInside];
             
             [cell.chooseBtn setTitle:@"3-5年" forState:UIControlStateNormal];
-        }else if ([commonModel.workage isEqualToString:@"workage-4"]){
+        }else if ([_commonModel.workage isEqualToString:@"workage-4"]){
             [cell.chooseBtn addTarget:self action:@selector(chooseTable:) forControlEvents:UIControlEventTouchUpInside];
             
             [cell.chooseBtn setTitle:@"5-7年" forState:UIControlStateNormal];
-        }else if ([commonModel.workage isEqualToString:@"workage-5"]){
+        }else if ([_commonModel.workage isEqualToString:@"workage-5"]){
             [cell.chooseBtn addTarget:self action:@selector(chooseTable:) forControlEvents:UIControlEventTouchUpInside];
             
             [cell.chooseBtn setTitle:@"7-10年" forState:UIControlStateNormal];
-        }else if ([commonModel.workage isEqualToString:@"workage-6"]){
+        }else if ([_commonModel.workage isEqualToString:@"workage-6"]){
             [cell.chooseBtn addTarget:self action:@selector(chooseTable:) forControlEvents:UIControlEventTouchUpInside];
             [cell.chooseBtn setTitle:@"10年以上" forState:UIControlStateNormal];
         }
@@ -258,7 +255,7 @@ static NSString *cellIdentifier = @"MTCell";
         //身份证选择照片
         SaveNameThreeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"three" forIndexPath:indexPath];
         
-        if (commonModel.appreal == 0) {
+        if (_commonModel.appreal == 0) {
             [cell.front addTarget:self action:@selector(choosePhoto:) forControlEvents:UIControlEventTouchUpInside];
             frontBtn = cell.front;
             cell.front.tag = 1;
@@ -269,14 +266,14 @@ static NSString *cellIdentifier = @"MTCell";
         }else{
             
             UIImageView *img = [[UIImageView alloc]init];
-            [img sd_setImageWithURL:[NSURL URLWithString:commonModel.cardno1] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            [img sd_setImageWithURL:[NSURL URLWithString:_commonModel.cardno1] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                 [cell.front setBackgroundImage:image forState:UIControlStateNormal];
                 
             }];
             
             
             UIImageView *img1 = [[UIImageView alloc]init];
-            [img1 sd_setImageWithURL:[NSURL URLWithString:commonModel.cardno1] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            [img1 sd_setImageWithURL:[NSURL URLWithString:_commonModel.cardno1] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                 [cell.reverse setBackgroundImage:image forState:UIControlStateNormal];
                 
             }];
@@ -296,7 +293,7 @@ static NSString *cellIdentifier = @"MTCell";
         //证件选择照片
         SaveNameFourCell *cell = [tableView dequeueReusableCellWithIdentifier:@"four" forIndexPath:indexPath];
 
-        if (commonModel.appreal == 0) {
+        if (_commonModel.appreal == 0) {
             [cell.papersBtn addTarget:self action:@selector(choosePhoto:) forControlEvents:UIControlEventTouchUpInside];
             cell.papersBtn.tag = 3;
             papersBtn = cell.papersBtn;
@@ -304,7 +301,7 @@ static NSString *cellIdentifier = @"MTCell";
         }else{
             
             UIImageView *img1 = [[UIImageView alloc]init];
-            [img1 sd_setImageWithURL:[NSURL URLWithString:commonModel.qualificate] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            [img1 sd_setImageWithURL:[NSURL URLWithString:_commonModel.qualificate] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                 [cell.papersBtn setBackgroundImage:image forState:UIControlStateNormal];
                 
             }];
@@ -323,14 +320,14 @@ static NSString *cellIdentifier = @"MTCell";
         //户籍所在地
         SaveNameFirstCell *cell = [tableView dequeueReusableCellWithIdentifier:@"first" forIndexPath:indexPath];
 
-        if (commonModel.appreal == 0) {
+        if (_commonModel.appreal == 0) {
             cell.titleText.text = self.dataSoucre.lastObject;
             cell.textField.placeholder = self.placeHoldArray.lastObject;
         }else{
             
             cell.titleText.text = self.dataSoucre.lastObject;
             cell.textField.placeholder = self.placeHoldArray.lastObject;
-            cell.textField.text = commonModel.hjcityarea;
+            cell.textField.text = _commonModel.hjcityarea;
             
         }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -341,7 +338,7 @@ static NSString *cellIdentifier = @"MTCell";
 
         XRZPickerCell *cell = [tableView dequeueReusableCellWithIdentifier:@"picker"];
         
-        if (commonModel.appreal == 0) {
+        if (_commonModel.appreal == 0) {
             [cell.mutableArray[0] addTarget:self action:@selector(actionClick:) forControlEvents:UIControlEventTouchUpInside];
             self.province = cell.mutableArray[0];
             [self.province setTitle:@"省" forState:UIControlStateNormal];
@@ -380,14 +377,14 @@ static NSString *cellIdentifier = @"MTCell";
         //详细地址
         SaveNameFirstCell *cell = [tableView dequeueReusableCellWithIdentifier:@"first" forIndexPath:indexPath];
     
-    if (commonModel.appreal == 0) {
+    if (_commonModel.appreal == 0) {
         cell.titleText.text = @"详细地址";
         cell.textField.placeholder = @"请输入详细地址（街、道、门牌号）";
  
     }else{
         cell.titleText.text = @"详细地址";
         cell.textField.placeholder = @"请输入详细地址（街、道、门牌号）";
-        cell.textField.text = commonModel.addr;
+        cell.textField.text = _commonModel.addr;
     }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
@@ -399,6 +396,7 @@ static NSString *cellIdentifier = @"MTCell";
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.btn.layer.masksToBounds= YES;
         cell.btn.layer.cornerRadius = 20;
+        cell.btn.backgroundColor = HWColor(63, 203, 125);
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }
@@ -452,9 +450,6 @@ static NSString *cellIdentifier = @"MTCell";
 
 - (void)choosePhoto:(XRZBackButton *)btn{
     
-    
-
-    
     if (btn.tag == 1) {
         
         papersBtn.selected = NO;
@@ -473,7 +468,7 @@ static NSString *cellIdentifier = @"MTCell";
         
         [self alertChoose];
 }
-//    
+    
     if (btn.tag == 3) {
         resevstBtn.selected = NO;
         frontBtn.selected = NO;
@@ -489,7 +484,7 @@ static NSString *cellIdentifier = @"MTCell";
 - (void)alertChoose{
     
     
-    XRZAlertView *alertView = [XRZAlertView showInView:self.view withTitle:@"上传照片" message:@"请选择上传方式" confirmButtonTitle:@"拍照" cancelButtonTitle:@"相册"];
+    XRZAlertView *alertView = [XRZAlertView showInView:self.view withTitle:@"上传照片" message:@"请选择上传方式" confirmButtonTitle:@"相册" cancelButtonTitle:@"拍照"];
     
     [alertView handleCancel:^{
         //拍照
@@ -585,10 +580,13 @@ static NSString *cellIdentifier = @"MTCell";
         if (frontBtn.selected) {
             
             [frontBtn setBackgroundImage:image forState:UIControlStateNormal];
+            
         }if (resevstBtn.selected) {
+            
             [resevstBtn setBackgroundImage:image forState:UIControlStateNormal];
 
         }if (papersBtn.selected) {
+            
             [papersBtn setBackgroundImage:image forState:UIControlStateNormal];
             
         }
@@ -682,17 +680,6 @@ static NSString *cellIdentifier = @"MTCell";
 
 - (void)btnClick:(UIButton *)sender{
     
-//    if (sender.tag == 1) {
-//         self.btn.titleLabel.text = sender.titleLabel.text;
-//    }else if (sender.tag == 2){
-//         self.btn.titleLabel.text = sender.titleLabel.text;
-//    }else if (sender.tag == 3){
-//         self.btn.titleLabel.text = sender.titleLabel.text;
-//    }else if (sender.tag == 4){
-//         self.btn.titleLabel.text = sender.titleLabel.text;
-//    }else if (sender.tag == 5){
-//         self.btn.titleLabel.text = sender.titleLabel.text;
-//    }
     
     if (sender.selected) {
         sender.backgroundColor = HWColor(63, 203, 125);

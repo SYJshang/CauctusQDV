@@ -142,7 +142,7 @@
     //[UMessage registerDeviceToken:deviceToken];
     //用户可以在这个方法里面获取devicetoken
     
-    XRZLog(@"设备deviceToken%@",[[[[deviceToken description] stringByReplacingOccurrencesOfString: @"<" withString: @""]
+    XRZLog(@"设备deviceToken》》》》》》》》%@",[[[[deviceToken description] stringByReplacingOccurrencesOfString: @"<" withString: @""]
                   stringByReplacingOccurrencesOfString: @">" withString: @""]
                  stringByReplacingOccurrencesOfString: @" " withString: @""]);
 }
@@ -153,7 +153,8 @@
  //1.2.7版本开始自动捕获这个方法，log以application:didFailToRegisterForRemoteNotificationsWithError开头
      
      XRZLog(@"错误信息%@",error);
- }
+
+}
 
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
